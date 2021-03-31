@@ -4,14 +4,14 @@
 <div class="uk-position-center">
     <div class="uk-light uk-background-secondary uk-padding">
     <h3 class="uk-text-center">Login</h3>
-        <form method="POST" action="{{ route('login') }}">
+        <form class="uk-form-stacked" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                <label class="uk-form-label" for="form-horizontal-text">Email</label>
+                <div class="uk-form-controls">
                     <input class="uk-input @error('email') uk-form-danger @enderror" id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 </div>
-                @error('email')
+                    @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -19,8 +19,8 @@
             </div>
 
             <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                <label class="uk-form-label" for="form-horizontal-text">Password</label>
+                <div class="uk-form-controls">
                     <input id="password" type="password" class="uk-input @error('password') uk-form-danger @enderror" name="password" required autocomplete="current-password">        
                 </div>
                 @error('password')

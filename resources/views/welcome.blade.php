@@ -1,99 +1,72 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <title>Laravel News</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.uikit.min.css">
+    <link rel="stylesheet" href="{{ url('css/main.css') }}">
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit-icons.min.js"></script>
 
-            .full-height {
-                height: 100vh;
-            }
+</head>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
 
-            .position-ref {
-                position: relative;
-            }
+        <div class="uk-navbar-left uk-margin-left">
+            <a class="uk-navbar-item uk-logo" href="#">Laravel News</a>
+        </div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        <div class="uk-navbar-right">
 
-            .content {
-                text-align: center;
-            }
+            <ul class="uk-navbar-nav uk-margin-right">
+                @if (Route::has('login'))
+                @auth
+                <li><a href="{{ url('/home') }}">Home</a></li>
+                @else
+                <li><a href="{{ route('login') }}">Login</a></li>
 
-            .title {
-                font-size: 84px;
-            }
+                @if (Route::has('register'))
+                <li><a href="{{ route('register') }}">Register</a></li>
+                @endif
+                @endauth
+                @endif
+            </ul>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        </div>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    </nav>
+    <div class="uk-container uk-container-medium uk-padding">
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+        <div class="uk-child-width-1-3@m" uk-grid>
+            @foreach($arrNews as $post)
+            <div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="https://getuikit.com/docs/images/light.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h4 class="uk-card-title">{{ str_limit($post->title, $limit = 20, $end = '...')  }}</h4>
+                        <p>{{ str_limit($post->description, $limit = 100, $end = '...')  }}</p>
+                    </div>
+                    <div class="uk-card-footer">
+                        <sup>Written by {{ $post->news_has_user->name }} on
+                            {{ $post->created_at->format('m F Y')}}</sup>
+                    </div>
                 </div>
             </div>
+            @endforeach
+            {{ $arrNews->links() }}
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
