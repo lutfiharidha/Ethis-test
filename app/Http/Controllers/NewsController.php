@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\News;
+use App\User;
 use Auth;
+use App\Notifications\NewPost;
+
 class NewsController extends Controller
 {
     public function index()
@@ -35,8 +38,7 @@ class NewsController extends Controller
         $newsAdd->description = $request->description; 
         $newsAdd->user_id = Auth::user()->id; 
         $newsAdd->save(); 
-        
-        return redirect()->route('allNews')->with('msg', 'News Success Added');
+        return redirect()->route('home');
     }
 
     public function edit($id)
@@ -74,8 +76,19 @@ class NewsController extends Controller
     public function delete($id)
     {
         $newsDelete = News::findOrFail($id);
+        $oldImage = public_path().'/img/news/'.$newsDelete->image;
+        unlink($oldImage);
         $newsDelete->delete(); 
         
         return redirect()->back()->with('msg', 'News Success Updated');
+    }
+
+    public function notifRead(Request $request)
+    {
+        auth()->user()
+        ->unreadNotifications->when($request->input('id'), function($query) use ($request){
+            return $query->where('id', $request->input('id'));
+        })->markAsRead();
+        return response()->noContent();
     }
 }
