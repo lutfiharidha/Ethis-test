@@ -7,10 +7,14 @@
     <title>Laravel News</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.uikit.min.css">
+    <link rel="stylesheet" href="{{ url('css/main.css') }}">
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.uikit.min.js"></script>
 </head>
 <body>
     <nav class="uk-navbar-container" uk-navbar>
@@ -45,5 +49,6 @@
     <div class="uk-container uk-padding-small uk-container-medium">
         @yield('content')
     </div>
+    @yield('script')
 </body>
 </html>
