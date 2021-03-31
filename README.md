@@ -26,4 +26,4 @@ php artisan passport:install
 php artisan serve
 ```
 ## Informasi Tambahan
-User tidak dapat mengakses masuk aplikasi dan notiffikasi tidak akan muncul jika user belum memverifikasi email. Untuk membuat aplikasi mengirim ke semua user kecuali pembuat post ubah pada file app\Observers\NewsObserver.php
+User tidak dapat mengakses masuk aplikasi dan notifikasi tidak akan muncul jika user belum memverifikasi email. Untuk membuat aplikasi mengirim ke semua user kecuali pembuat post ubah pada file app\Observers\NewsObserver.php
