@@ -2,12 +2,12 @@
 
 @section('content')
 <h4 class="uk-text-center">Your Latest News</h1>
-    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-    @foreach($posts as $post)
+    <div class="uk-child-width-1-3@s" uk-grid>
+        @foreach($posts as $post)
         <div>
             <div class="uk-card uk-card-default">
-                <div class="uk-card-media-top">
-                    <img src="https://getuikit.com/docs/images/light.jpg" alt="">
+                <div class="uk-card-media-top crop1">
+                    <img class="" src="{{ url('img/news', $post->image) }}" alt="" srcset="">
                 </div>
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">{{ $post->title }}</h3>
@@ -15,6 +15,6 @@
                 </div>
             </div>
         </div>
-    @endforeach
+        @endforeach
     </div>
-@endsection
+    @endsection

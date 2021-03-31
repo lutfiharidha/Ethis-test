@@ -8,6 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\News;
 use App\User;
+use App\Mail\SendMail;
+
 class NewPost extends Notification
 {
     use Queueable;
@@ -18,10 +20,11 @@ class NewPost extends Notification
      * @return void
      */
 
-    protected $author, $news;
+    protected $user, $author, $news;
 
-    public function __construct($author, $news)
+    public function __construct($user, $author, $news)
     {
+        $this->user = $user;
         $this->author = $author;
         $this->news = $news;
     }
@@ -45,10 +48,7 @@ class NewPost extends Notification
      */
     // public function toMail($notifiable)
     // {
-    //     return (new MailMessage)
-    //                 ->line('The introduction to the notification.')
-    //                 ->action('Notification Action', url('/'))
-    //                 ->line('Thank you for using our application!');
+    //     // return new SendMail($this->user, $this->author, $this->news);
     // }
 
     /**
@@ -60,6 +60,7 @@ class NewPost extends Notification
     public function toArray($notifiable)
     {
         return [
+            'user' => $this->user,
             'author' => $this->author,
             'news' => $this->news,
         ];

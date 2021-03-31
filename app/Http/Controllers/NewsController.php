@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\News;
 use App\User;
 use Auth;
-use App\Notifications\NewPost;
+
 
 class NewsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     public function index()
     {
         $arrNews = News::where('user_id', Auth::user()->id)->get();
@@ -20,7 +25,7 @@ class NewsController extends Controller
         return view('news.addNews');
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //function untuk menambah post
     {
         $this->validate($request, [
             'title' =>'required',
@@ -38,6 +43,7 @@ class NewsController extends Controller
         $newsAdd->description = $request->description; 
         $newsAdd->user_id = Auth::user()->id; 
         $newsAdd->save(); 
+
         return redirect()->route('home');
     }
 
@@ -47,17 +53,18 @@ class NewsController extends Controller
         return view('news.editNews', compact('news'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) //function untuk mengubah post
     {
         $this->validate($request, [
             'title' =>'required',
             'description' => 'required',
-            'imageNews' => 'mimes:jpeg,bmp,png'
+            'imageNews' => 'mimes:jpeg,jpg,bmp,png'
         ]);
         $newsEdit = News::findOrFail($id);
         if($request->has('imageNews')){
             $oldImage = public_path().'/img/news/'.$newsEdit->image;
             unlink($oldImage);
+            
             $newImageNews = $request->imageNews;
             $imageName = rand(3000,999999).$newImageNews->getClientOriginalName();
             $destinationPath = public_path().'/img/news/';
@@ -73,7 +80,7 @@ class NewsController extends Controller
         return redirect()->route('allNews')->with('msg', 'News Success Updated');
     }
 
-    public function delete($id)
+    public function delete($id) //function untuk menghapus post
     {
         $newsDelete = News::findOrFail($id);
         $oldImage = public_path().'/img/news/'.$newsDelete->image;
@@ -83,7 +90,7 @@ class NewsController extends Controller
         return redirect()->back()->with('msg', 'News Success Updated');
     }
 
-    public function notifRead(Request $request)
+    public function notifRead(Request $request) //function untuk menandai bahwasan nya notif telah dibaca
     {
         auth()->user()
         ->unreadNotifications->when($request->input('id'), function($query) use ($request){

@@ -9,6 +9,7 @@
         
     </div>
 @endif
+<div class=" uk-light uk-background-secondary uk-padding">
 <form method="POST" action="{{ route('news.update', $news) }}" class="uk-form-stacked uk-padding" enctype="multipart/form-data">
     @csrf
     <div class="uk-margin" uk-margin>
@@ -28,11 +29,12 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-stacked-text">Description</label>
         <div class="uk-form-controls">
-            <textarea name="description" class="uk-textarea" required>{{ $news->description }}</textarea>
+            <textarea rows="10" name="description" class="uk-textarea" required>{{ $news->description }}</textarea>
         </div>
     </div>
     <div class="uk-margin">
         <button class="uk-button uk-button-primary uk-align-right" type="submit">Publish</button>
     </div>
 </form>
+</div>
 @endsection
