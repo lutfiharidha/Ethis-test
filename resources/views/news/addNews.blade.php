@@ -13,7 +13,7 @@
     @csrf
     <div class="uk-margin" uk-margin>
         <div uk-form-custom="target: true">
-            <input type="file" name="imageNews">
+            <input type="file" name="imageNews" required>
             <input class="uk-input uk-form-width-medium" type="text" placeholder="Select file" disabled>
             <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
         </div>
@@ -21,7 +21,7 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-stacked-text">Title</label>
         <div class="uk-form-controls">
-            <input class="uk-input" name="title" id="form-stacked-text" type="text" placeholder="News Title" required>
+            <input class="uk-input" name="title" id="form-stacked-text" type="text" placeholder="News Title" value="{{ old('title') }}" required>
         </div>
     </div>
     <div class="uk-margin">

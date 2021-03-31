@@ -18,6 +18,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/u/read/news/notification', 'NewsController@notifRead')->name('notif.read');
+
 Route::get('/u/news', 'NewsController@index')->name('allNews');
 Route::get('/u/news/add', 'NewsController@add')->name('news.add');
 Route::post('/u/news/store', 'NewsController@store')->name('news.store');
