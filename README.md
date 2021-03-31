@@ -1,6 +1,6 @@
 # Ethis-test
 
-## Installation
+## Installation Local Deploy
 
 - Jalankan perintah 
 ```bash
@@ -16,6 +16,10 @@ php artisan key:generate
 ```bash 
 #atau jalankan perintah 
 php artisan migrate --seed
+```
+- buat token keys dengan cara menjalankan perintah
+```bash
+php artisan passport:install
 ```
 - tearkhir jalankan perintah 
 ```bash 
