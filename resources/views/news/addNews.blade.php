@@ -5,10 +5,10 @@
 @if($errors->any())
     <div class="uk-alert-danger" uk-alert>
         <a class="uk-alert-close" uk-close></a>
-            {{ implode('', $errors->all(':message')) }}
-        
+        {{ implode('', $errors->all(':message')) }}
     </div>
 @endif
+<div class=" uk-light uk-background-secondary uk-padding">
 <form method="POST" action="{{ route('news.store') }}" class="uk-form-stacked uk-padding" enctype="multipart/form-data">
     @csrf
     <div class="uk-margin" uk-margin>
@@ -27,11 +27,12 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-stacked-text">Description</label>
         <div class="uk-form-controls">
-            <textarea name="description" class="uk-textarea" required></textarea>
+            <textarea rows="10" name="description" class="uk-textarea" required></textarea>
         </div>
     </div>
     <div class="uk-margin">
         <button class="uk-button uk-button-primary uk-align-right" type="submit">Publish</button>
     </div>
 </form>
+</div>
 @endsection
