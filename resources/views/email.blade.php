@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <td style="padding:0;font-size:24px;line-height:28px;font-weight:bold;">
-                                <a href="http://www.example.com/" style="text-decoration:none;"><img
+                                <a href="http://www.google.com/" style="text-decoration:none;"><img
                                         src="https://assets.codepen.io/210284/1200x800-2.png" width="600" alt=""
                                         style="width:100%;height:auto;display:block;border:none;text-decoration:none;color:#363636;"></a>
                             </td>

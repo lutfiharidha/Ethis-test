@@ -50,8 +50,8 @@
             @foreach($arrNews as $post)
             <div>
                 <div class="uk-card uk-card-default">
-                    <div class="uk-card-media-top">
-                        <img src="https://getuikit.com/docs/images/light.jpg" alt="">
+                    <div class="uk-card-media-top crop1">
+                        <img class="" src="{{ url('img/news', $post->image) }}" alt="" srcset="">
                     </div>
                     <div class="uk-card-body">
                         <h4 class="uk-card-title">{{ str_limit($post->title, $limit = 20, $end = '...')  }}</h4>
